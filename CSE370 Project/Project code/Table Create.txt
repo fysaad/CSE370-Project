@@ -1,0 +1,147 @@
+-- Create and use the KrishiDirect database (Database Creation for MySQL)
+CREATE DATABASE IF NOT EXISTS krishidirect CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE krishidirect;
+
+-----------------------------------------------------------
+-- 2. Table Creation Code
+-----------------------------------------------------------
+
+--  USER Entity (Handles Farmers, Buyers, Drivers, and Managers)
+CREATE TABLE Users (
+    User_ID INT AUTO_INCREMENT PRIMARY KEY,
+    Name VARCHAR(255) NOT NULL,
+    Phone_Number VARCHAR(20) NOT NULL UNIQUE, -- Unique phone ensuring no duplicates
+    -- Defines the specific Role of the user
+    Role ENUM('Farmer', 'Retail_Buyer', 'Wholesaler', 'Driver', 'Storage_Manager') NOT NULL,
+    District VARCHAR(100) NOT NULL,
+    Upazila VARCHAR(100) NOT NULL,
+    NID_Number VARCHAR(17) UNIQUE, -- Optional field, used for Farmers
+    UAO_Verification_Token VARCHAR(100) UNIQUE, -- Optional field, used for Farmers
+    Created_At TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    
+    -- Constraint: Only farmers MUST have NID/UAO verification.
+    CONSTRAINT check_farmer_verification CHECK (
+        (Role != 'Farmer') OR (NID_Number IS NOT NULL AND UAO_Verification_Token IS NOT NULL)
+    )
+) ENGINE=InnoDB;
+
+--  DHAKA_HUB Entity (Central Distribution Hubs in Dhaka)
+CREATE TABLE Dhaka_Hub (
+    Hub_ID INT AUTO_INCREMENT PRIMARY KEY,
+    Hub_Name VARCHAR(255) NOT NULL,
+    Location_Address_Dhaka TEXT NOT NULL
+) ENGINE=InnoDB;
+
+--  PRODUCT/LISTING Entity (Handles the Dual-Mode F2C Marketplace)
+CREATE TABLE Product (
+    Product_ID INT AUTO_INCREMENT PRIMARY KEY,
+    Farmer_ID INT NOT NULL,
+    Crop_Name VARCHAR(255) NOT NULL,
+    Total_Quantity DECIMAL(12, 2) NOT NULL, -- Total crop amount listed by farmer
+    Available_Quantity DECIMAL(12, 2) NOT NULL, -- Current quantity remaining to be bought
+    Minimum_Order_Quantity DECIMAL(12, 2) NOT NULL, -- Sets Retail vs Wholesale buying threshold
+    Price_Per_KG DECIMAL(10, 2) NOT NULL,
+    Harvest_Date DATE NOT NULL, -- Crucial for Perishable Alert System
+    Expiry_Date DATE NOT NULL, -- Crucial for Perishable Alert System
+    Listing_Date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    -- FK constraints linking Product to the specific Farmer
+    CONSTRAINT fk_product_farmer FOREIGN KEY (Farmer_ID) REFERENCES Users(User_ID) ON DELETE CASCADE,
+    
+    -- CHECK constraints to enforce basic positive data logic
+    CONSTRAINT check_positive_price CHECK (Price_Per_KG > 0),
+    CONSTRAINT check_positive_qty CHECK (Total_Quantity > 0),
+    CONSTRAINT check_available_qty CHECK (Available_Quantity >= 0),
+    CONSTRAINT check_available_logic CHECK (Available_Quantity <= Total_Quantity),
+    CONSTRAINT check_date_logic CHECK (Expiry_Date > Harvest_Date)
+) ENGINE=InnoDB;
+
+--  COLD_STORAGE Facility Entity (Handles Storage Capacity)
+CREATE TABLE Cold_Storage (
+    Storage_ID INT AUTO_INCREMENT PRIMARY KEY,
+    Manager_ID INT NOT NULL,
+    Facility_Name VARCHAR(255) NOT NULL,
+    District VARCHAR(100) NOT NULL,
+    Upazila VARCHAR(100) NOT NULL,
+    Max_Sack_Capacity INT NOT NULL, -- Physical limit for number of standard sacks
+    Max_Cubic_Meter_Capacity INT NOT NULL, -- Physical limit for total cubic space
+    Current_Sack_Count INT DEFAULT 0, -- Real-time utilization tracker
+    Current_Cubic_Meter_Count INT DEFAULT 0, -- Real-time utilization tracker
+
+    -- FK constraints linking Cold Storage to its dedicated Manager
+    CONSTRAINT fk_storage_manager FOREIGN KEY (Manager_ID) REFERENCES Users(User_ID) ON DELETE CASCADE,
+    
+    -- CHECK constraints
+    CONSTRAINT check_sack_cap CHECK (Max_Sack_Capacity > 0),
+    CONSTRAINT check_cbm_cap CHECK (Max_Cubic_Meter_Capacity > 0),
+    CONSTRAINT check_current_sack CHECK (Current_Sack_Count >= 0),
+    CONSTRAINT check_current_cbm CHECK (Current_Cubic_Meter_Count >= 0)
+) ENGINE=InnoDB;
+
+--  STORAGE_BOOKING Entity (Handles Farmer Reservations in Cold Storage)
+CREATE TABLE Storage_Booking (
+    Booking_ID INT AUTO_INCREMENT PRIMARY KEY,
+    Storage_ID INT NOT NULL,
+    Farmer_ID INT NOT NULL,
+    Sacks_To_Store INT NOT NULL, -- Amount of sack space requested
+    Cubic_Meters_To_Occupy INT NOT NULL, -- Amount of cubic space requested
+    Booking_Date DATE NOT NULL,
+    Status ENUM('Active', 'Checked-Out') DEFAULT 'Active',
+
+    -- FK constraints linking booking to facility and farmer
+    CONSTRAINT fk_booking_storage FOREIGN KEY (Storage_ID) REFERENCES Cold_Storage(Storage_ID) ON DELETE CASCADE,
+    CONSTRAINT fk_booking_farmer FOREIGN KEY (Farmer_ID) REFERENCES Users(User_ID) ON DELETE CASCADE,
+
+    -- CHECK constraints
+    CONSTRAINT check_booking_sacks CHECK (Sacks_To_Store > 0),
+    CONSTRAINT check_booking_cbm CHECK (Cubic_Meters_To_Occupy > 0)
+) ENGINE=InnoDB;
+
+--  SHIPMENT / TRUCK_POOL Entity (Handles Bulk Multi-Leg Logistics)
+CREATE TABLE Shipment (
+    Shipment_ID INT AUTO_INCREMENT PRIMARY KEY,
+    Driver_ID INT NOT NULL,
+    Hub_ID INT NOT NULL,
+    Total_Pooled_Weight DECIMAL(12, 2) DEFAULT 0.00, -- Consolidates weight of all linked orders
+    Truck_Plate_Number VARCHAR(20) NOT NULL,
+    Shipment_Status ENUM('Pooling', 'Dispatched', 'Arrived_At_Hub') DEFAULT 'Pooling',
+    Dispatched_At TIMESTAMP NULL,
+    Arrived_At_Hub_At TIMESTAMP NULL,
+
+    -- FK constraints linking to the specific Driver and the Destination Dhaka Hub
+    CONSTRAINT fk_shipment_driver FOREIGN KEY (Driver_ID) REFERENCES Users(User_ID) ON DELETE CASCADE,
+    CONSTRAINT fk_shipment_hub FOREIGN KEY (Hub_ID) REFERENCES Dhaka_Hub(Hub_ID) ON DELETE CASCADE
+) ENGINE=InnoDB;
+
+--  ORDER Entity (Handles F2C Direct Buying and Escrow Transaction Status)
+CREATE TABLE Orders (
+    Order_ID INT AUTO_INCREMENT PRIMARY KEY,
+    Buyer_ID INT NOT NULL,
+    Product_ID INT NOT NULL,
+    Shipment_ID INT, -- Will be filled when order is linked to a bulk shipment for logistics
+    Order_Quantity DECIMAL(12, 2) NOT NULL, -- Verified against Product MOQ by application logic
+    Total_Amount DECIMAL(12, 2) NOT NULL,
+    Order_Status ENUM('Pending', 'Paid-Escrow', 'In-Transit', 'Completed', 'Disputed') DEFAULT 'Pending',
+    Order_Date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    -- FK constraints linking Order to Buyer, Product, and eventually Shipment
+    CONSTRAINT fk_order_buyer FOREIGN KEY (Buyer_ID) REFERENCES Users(User_ID) ON DELETE CASCADE,
+    CONSTRAINT fk_order_product FOREIGN KEY (Product_ID) REFERENCES Product(Product_ID) ON DELETE CASCADE,
+    CONSTRAINT fk_order_shipment FOREIGN KEY (Shipment_ID) REFERENCES Shipment(Shipment_ID) ON DELETE SET NULL,
+
+    -- CHECK constraints
+    CONSTRAINT check_order_amount CHECK (Total_Amount > 0)
+) ENGINE=InnoDB;
+
+--  PAYMENT Entity (Handles bKash/Nagad Escrow details)
+CREATE TABLE Payment (
+    Payment_ID INT AUTO_INCREMENT PRIMARY KEY,
+    Order_ID INT NOT NULL UNIQUE, -- Ensures exactly One Payment per Order (1:1 relation)
+    Transaction_MFS_ID VARCHAR(255) NOT NULL UNIQUE, -- The bKash/Nagad Transaction ID (TrxID)
+    Amount DECIMAL(12, 2) NOT NULL,
+    Payment_Status ENUM('Held-in-Escrow', 'Released', 'Refunded') DEFAULT 'Held-in-Escrow',
+    Paid_At TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    -- FK constraint linking Payment back to its specific Order
+    CONSTRAINT fk_payment_order FOREIGN KEY (Order_ID) REFERENCES Orders(Order_ID) ON DELETE CASCADE
+) ENGINE=InnoDB;

@@ -1,0 +1,171 @@
+-- ==========================================================
+-- 1. INSERT Users (IDs 201 to 300)
+-- ==========================================================
+INSERT INTO `users` (`User_ID`, `Name`, `Phone_Number`, `Role`, `District`) VALUES
+(201, 'Mia Ariful Miah', '01543015624', 'Buyer', 'Comilla'),
+(202, 'Khan Rubel Uddin', '01472561022', 'Truck Driver', 'Dhaka'),
+(203, 'Sarker Alamgir Ali', '01931025140', 'Buyer', 'Noakhali'),
+(204, 'Mohammad Alim Rahman', '01311365958', 'Manager', 'Kushtia'),
+(205, 'Chowdhury Shahid Islam', '01342057229', 'Manager', 'Pabna'),
+(206, 'Sarker Shahid Ali', '01489047632', 'Farmer', 'Kushtia'),
+(207, 'Abdul Karim Rahman', '01712892132', 'Buyer', 'Rangpur'),
+(208, 'Mia Biplob Islam', '01858474206', 'Farmer', 'Comilla'),
+(209, 'Kazi Ariful Ahmed', '01827596821', 'Farmer', 'Sylhet'),
+(210, 'Mohammad Sujon Ahmed', '01713044237', 'Farmer', 'Rangpur'),
+(211, 'Abdul Nazmul Islam', '01696869862', 'Buyer', 'Jessore'),
+(212, 'Mohammad Alim Islam', '01798860528', 'Farmer', 'Barisal'),
+(213, 'Begum Jamal Uddin', '01415594870', 'Truck Driver', 'Sylhet'),
+(214, 'Mohammad Tariq Ahmed', '01585435204', 'Buyer', 'Noakhali'),
+(215, 'Mia Kabir Khan', '01624232191', 'Farmer', 'Rajshahi'),
+(216, 'Abdul Kamal Khan', '01311728434', 'Buyer', 'Dhaka'),
+(217, 'Mia Nazmul Rahman', '01736928039', 'Farmer', 'Pabna'),
+(218, 'Kazi Tanvir Ahmed', '01480110300', 'Farmer', 'Barisal'),
+(219, 'Mohammad Hasan Khan', '01720882729', 'Farmer', 'Bogra'),
+(220, 'Sarker Kamal Miah', '01446612772', 'Farmer', 'Khulna'),
+(221, 'Begum Rubel Khan', '01774751921', 'Farmer', 'Dinajpur'),
+(222, 'Kazi Rubel Chowdhury', '01324888165', 'Truck Driver', 'Pabna'),
+(223, 'Kazi Rafiq Rahman', '01450097203', 'Farmer', 'Khulna'),
+(224, 'Mia Alim Chowdhury', '01318534355', 'Farmer', 'Dhaka'),
+(225, 'Khan Kamal Ahmed', '01659207179', 'Truck Driver', 'Noakhali'),
+(226, 'Abdul Sujon Hossain', '01719543261', 'Farmer', 'Jessore'),
+(227, 'Begum Jamal Uddin', '01541763184', 'Truck Driver', 'Dhaka'),
+(228, 'Begum Hasan Ali', '01332567482', 'Buyer', 'Mymensingh'),
+(229, 'Md. Tariq Khan', '01692963302', 'Buyer', 'Khulna'),
+(230, 'Sarker Ariful Chowdhury', '01455340495', 'Truck Driver', 'Barisal'),
+(231, 'Mohammad Alamgir Khan', '01943928238', 'Buyer', 'Comilla'),
+(232, 'Begum Rubel Hossain', '01335589779', 'Farmer', 'Dinajpur'),
+(233, 'Md. Rubel Miah', '01894248750', 'Farmer', 'Mymensingh'),
+(234, 'Mohammad Hasan Uddin', '01789794176', 'Buyer', 'Jessore'),
+(235, 'Khan Ariful Ahmed', '01571179291', 'Manager', 'Kushtia'),
+(236, 'Sheikh Sujon Ahmed', '01678986939', 'Truck Driver', 'Dinajpur'),
+(237, 'Kazi Jamal Rahman', '01789923089', 'Buyer', 'Khulna'),
+(238, 'Abdul Karim Ali', '01370329330', 'Truck Driver', 'Barisal'),
+(239, 'Abdul Jahangir Uddin', '01361967269', 'Buyer', 'Noakhali'),
+(240, 'Chowdhury Rahim Rahman', '01376804720', 'Farmer', 'Khulna'),
+(241, 'Khan Tariq Chowdhury', '01848859673', 'Buyer', 'Chittagong'),
+(242, 'Kazi Jamal Chowdhury', '01349128785', 'Farmer', 'Sylhet'),
+(243, 'Sarker Ariful Ali', '01838034280', 'Farmer', 'Pabna'),
+(244, 'Md. Tanvir Miah', '01748627526', 'Manager', 'Dhaka'),
+(245, 'Mohammad Hasan Islam', '01383099316', 'Farmer', 'Pabna'),
+(246, 'Abdul Biplob Uddin', '01954505317', 'Farmer', 'Jessore'),
+(247, 'Md. Ariful Islam', '01925282155', 'Buyer', 'Barisal'),
+(248, 'Mohammad Nazmul Ahmed', '01477407267', 'Buyer', 'Kushtia'),
+(249, 'Sheikh Rafiq Rahman', '01311757659', 'Farmer', 'Noakhali'),
+(250, 'Chowdhury Rafiq Hossain', '01825342575', 'Buyer', 'Pabna'),
+(251, 'Chowdhury Rahim Miah', '01851041967', 'Farmer', 'Comilla'),
+(252, 'Khan Biplob Miah', '01351149880', 'Farmer', 'Chittagong'),
+(253, 'Sarker Kabir Miah', '01448095793', 'Buyer', 'Mymensingh'),
+(254, 'Chowdhury Karim Rahman', '01918477258', 'Buyer', 'Rangpur'),
+(255, 'Abdul Alim Ahmed', '01724573960', 'Farmer', 'Barisal'),
+(256, 'Sheikh Hasan Hossain', '01370251493', 'Farmer', 'Pabna'),
+(257, 'Begum Tariq Khan', '01612970721', 'Buyer', 'Dinajpur'),
+(258, 'Kazi Alamgir Khan', '01763410446', 'Farmer', 'Kushtia'),
+(259, 'Md. Kabir Ahmed', '01740594338', 'Buyer', 'Jessore'),
+(260, 'Kazi Karim Rahman', '01374538473', 'Truck Driver', 'Kushtia'),
+(261, 'Md. Tariq Ali', '01635562541', 'Farmer', 'Jessore'),
+(262, 'Chowdhury Karim Khan', '01358983541', 'Buyer', 'Rangpur'),
+(263, 'Abdul Sujon Khan', '01916508963', 'Farmer', 'Rangpur'),
+(264, 'Khan Jahangir Islam', '01978737979', 'Farmer', 'Dinajpur'),
+(265, 'Sheikh Karim Khan', '01625032029', 'Manager', 'Dinajpur'),
+(266, 'Mia Nazmul Ali', '01571073730', 'Buyer', 'Dinajpur'),
+(267, 'Begum Sujon Islam', '01767196097', 'Manager', 'Dinajpur'),
+(268, 'Kazi Jahangir Miah', '01685463473', 'Farmer', 'Dhaka'),
+(269, 'Chowdhury Alamgir Ahmed', '01894567296', 'Truck Driver', 'Kushtia'),
+(270, 'Md. Rafiq Islam', '01960262388', 'Farmer', 'Pabna'),
+(271, 'Mohammad Nazmul Ali', '01791896198', 'Buyer', 'Dinajpur'),
+(272, 'Mia Alim Uddin', '01557760841', 'Buyer', 'Pabna'),
+(273, 'Begum Sabbir Rahman', '01911265535', 'Truck Driver', 'Barisal'),
+(274, 'Khan Tanvir Miah', '01396304926', 'Buyer', 'Chittagong'),
+(275, 'Sarker Rubel Islam', '01719938756', 'Manager', 'Jessore'),
+(276, 'Begum Nazmul Rahman', '01595792986', 'Buyer', 'Noakhali'),
+(277, 'Kazi Karim Ali', '01670936851', 'Farmer', 'Mymensingh'),
+(278, 'Abdul Ariful Ahmed', '01760694656', 'Truck Driver', 'Jessore'),
+(279, 'Kazi Tariq Miah', '01667797336', 'Manager', 'Kushtia'),
+(280, 'Md. Jahangir Hossain', '01821490700', 'Buyer', 'Rangpur'),
+(281, 'Md. Tariq Miah', '01976228727', 'Farmer', 'Khulna'),
+(282, 'Md. Jamal Uddin', '01569680937', 'Buyer', 'Sylhet'),
+(283, 'Begum Alim Chowdhury', '01925855406', 'Farmer', 'Khulna'),
+(284, 'Mia Rafiq Islam', '01359564722', 'Farmer', 'Dhaka'),
+(285, 'Kazi Rahim Uddin', '01945458828', 'Farmer', 'Noakhali'),
+(286, 'Mia Alim Rahman', '01782872707', 'Farmer', 'Jessore'),
+(287, 'Abdul Kamal Rahman', '01833173700', 'Truck Driver', 'Kushtia'),
+(288, 'Mohammad Sumon Ahmed', '01940381809', 'Truck Driver', 'Rajshahi'),
+(289, 'Sarker Tariq Rahman', '01915049751', 'Farmer', 'Jessore'),
+(290, 'Abdul Rahim Hossain', '01873362050', 'Buyer', 'Sylhet'),
+(291, 'Kazi Alamgir Uddin', '01481615353', 'Buyer', 'Jessore'),
+(292, 'Mia Rahim Chowdhury', '01910955347', 'Buyer', 'Pabna'),
+(293, 'Kazi Sujon Uddin', '01848543801', 'Buyer', 'Kushtia'),
+(294, 'Chowdhury Hasan Ahmed', '01595485246', 'Buyer', 'Comilla'),
+(295, 'Begum Tanvir Hossain', '01546874813', 'Truck Driver', 'Kushtia'),
+(296, 'Mia Ariful Hossain', '01311602864', 'Buyer', 'Bogra'),
+(297, 'Abdul Sabbir Islam', '01393179110', 'Manager', 'Chittagong'),
+(298, 'Begum Tariq Islam', '01434213403', 'Farmer', 'Dhaka'),
+(299, 'Kazi Biplob Rahman', '01491832228', 'Manager', 'Dinajpur'),
+(300, 'Abdul Tanvir Hossain', '01882617008', 'Buyer', 'Bogra');
+
+-- ==========================================================
+-- 2. INSERT Dhaka_Hub
+-- ==========================================================
+INSERT INTO `dhaka_hub` (`Hub_ID`, `Hub_Name`, `Location_Address_Dhaka`) VALUES 
+(1, 'Tejgaon Central Hub', 'Plot 20, Tejgaon Industrial Area, Dhaka'),
+(2, 'Gabtoli Distribution Point', 'Near Gabtoli Bus Terminal, Dhaka'),
+(3, 'Jatrabari Wholesale Market Hub', 'Jatrabari, Dhaka'),
+(4, 'Uttara Sorting Center', 'Sector 10, Uttara, Dhaka');
+
+-- ==========================================================
+-- 3. INSERT Product
+-- ==========================================================
+INSERT INTO `product` (`Product_ID`, `Farmer_ID`, `Crop_Name`, `Total_Quantity`, `Available_Quantity`, `Minimum_Order_Quantity`, `Price_Per_KG`, `Harvest_Date`, `Expiry_Date`) VALUES 
+(1, 206, 'Diamond Potato', 5000.00, 4800.00, 500.00, 28.50, '2023-12-01', '2024-05-01'),
+(2, 208, 'Granola Potato', 12000.00, 12000.00, 1000.00, 26.00, '2023-12-05', '2024-05-05'),
+(3, 209, 'Local Onion', 3000.00, 2500.00, 200.00, 65.00, '2023-11-20', '2024-02-20'),
+(4, 210, 'Nasik Onion', 8000.00, 8000.00, 500.00, 62.00, '2023-11-25', '2024-02-25'),
+(5, 212, 'Brinjal (Eggplant)', 1000.00, 1000.00, 50.00, 45.00, '2023-12-10', '2023-12-25'),
+(6, 215, 'Cauliflower', 2000.00, 1800.00, 100.00, 35.00, '2023-12-08', '2023-12-20'),
+(7, 220, 'Tomato', 4000.00, 4000.00, 100.00, 55.00, '2023-12-15', '2024-01-05'),
+(8, 224, 'Green Chili', 500.00, 450.00, 20.00, 120.00, '2023-12-12', '2023-12-30');
+
+-- ==========================================================
+-- 4. INSERT Cold_Storage
+-- ==========================================================
+INSERT INTO `cold_storage` (`Storage_ID`, `Manager_ID`, `Facility_Name`, `District`, `Upazila`, `Max_Sack_Capacity`, `Max_Cubic_Meter_Capacity`, `Current_Sack_Count`, `Current_Cubic_Meter_Count`) VALUES 
+(1, 204, 'Kushtia Chill Zone', 'Kushtia', 'Kushtia Sadar', 50000, 10000, 0, 0),
+(2, 205, 'Pabna Agro Preserve', 'Pabna', 'Ishwardi', 75000, 15000, 0, 0),
+(3, 235, 'North Bengal Potato Storage', 'Kushtia', 'Kumarkhali', 100000, 20000, 0, 0),
+(4, 244, 'Dhaka City Fresh Hub', 'Dhaka', 'Tejgaon', 20000, 4000, 0, 0);
+
+-- ==========================================================
+-- 5. INSERT Storage_Booking
+-- ==========================================================
+INSERT INTO `storage_booking` (`Storage_ID`, `Farmer_ID`, `Sacks_To_Store`, `Cubic_Meters_To_Occupy`, `Booking_Date`, `Status`) VALUES 
+(1, 206, 1000, 200, '2023-12-05', 'Active'),
+(3, 210, 2000, 400, '2023-12-07', 'Active'),
+(2, 217, 1500, 300, '2023-12-08', 'Active');
+
+-- ==========================================================
+-- 6. INSERT Shipment
+-- ==========================================================
+INSERT INTO `shipment` (`Shipment_ID`, `Driver_ID`, `Hub_ID`, `Total_Pooled_Weight`, `Truck_Plate_Number`, `Shipment_Status`, `Dispatched_At`, `Arrived_At_Hub_At`) VALUES 
+(1, 202, 1, 0.00, 'Dhaka-Metro-T-112233', 'Pooling', NULL, NULL),
+(2, 213, 1, 5200.00, 'Sylhet-Metro-T-445566', 'Dispatched', '2023-12-15 08:00:00', NULL),
+(3, 222, 2, 7100.00, 'Pabna-Metro-T-778899', 'Arrived_At_Hub', '2023-12-14 09:00:00', '2023-12-14 17:00:00'),
+(4, 225, 3, 4800.00, 'Chitta-Metro-T-334455', 'Arrived_At_Hub', '2023-12-13 10:00:00', '2023-12-14 06:00:00');
+
+-- ==========================================================
+-- 7. INSERT Orders
+-- ==========================================================
+INSERT INTO `orders` (`Order_ID`, `Buyer_ID`, `Product_ID`, `Shipment_ID`, `Order_Quantity`, `Total_Amount`, `Order_Status`, `Order_Date`) VALUES 
+(1, 201, 1, NULL, 200.00, 5700.00, 'Pending', '2023-12-16 10:00:00'),
+(2, 203, 1, 2, 500.00, 14250.00, 'Paid-Escrow', '2023-12-14 11:00:00'),
+(3, 207, 3, 3, 500.00, 32500.00, 'In-Transit', '2023-12-14 09:00:00'),
+(4, 211, 4, 3, 1000.00, 62000.00, 'In-Transit', '2023-12-14 09:30:00'),
+(5, 216, 8, NULL, 50.00, 6000.00, 'Completed', '2023-12-13 14:00:00');
+
+-- ==========================================================
+-- 8. INSERT Payment
+-- ==========================================================
+INSERT INTO `payment` (`Order_ID`, `Transaction_MFS_ID`, `Amount`, `Payment_Status`, `Paid_At`) VALUES 
+(2, 'BKASH_TRX_A1B2C3D4', 14250.00, 'Held-in-Escrow', '2023-12-14 11:15:00'),
+(3, 'NAGAD_TRX_E5F6G7H8', 32500.00, 'Held-in-Escrow', '2023-12-14 09:10:00'),
+(4, 'BKASH_TRX_I9J0K1L2', 62000.00, 'Held-in-Escrow', '2023-12-14 09:45:00'),
+(5, 'NAGAD_TRX_M3N4O5P6', 6000.00, 'Released', '2023-12-13 14:10:00');
